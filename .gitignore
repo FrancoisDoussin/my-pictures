@@ -10,6 +10,7 @@
 
 # production
 /build
+/public/albums/*
 
 # misc
 .DS_Store
