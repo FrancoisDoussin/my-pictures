@@ -29,7 +29,7 @@ function Photos({ match }) {
       <Row gutter={16}>
         { pictures.map((picture, key) => {
           return (
-            <Col key={key} md={{ span: 12 }}>
+            <Col key={key} md={{ span: 8 }} style={{paddingTop: "10px"}}>
               <Card
                 hoverable
                 bodyStyle={{display: "none"}}
