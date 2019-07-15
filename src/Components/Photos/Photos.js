@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import Axios from "axios";
-import './Photos.css';
+import {Card, Col, Row} from "antd";
+import "./Photo.css";
 
 function Photos({ match }) {
   const [pictures, setPictures] = useState([]);
@@ -16,18 +17,33 @@ function Photos({ match }) {
     Axios
       .get(`/albums/${folder}/pictures`)
       .then(response => setPictures(response.data));
-  },[]);
+  },[folder]);
 
   return (
     <div>
-      <ReactMarkdown source={description} />
-      { pictures.map((picture, key) => {
-        return <img
-          alt={`album-${folder}`}
-          key={key}
-          src={`/albums/${folder}/pictures/${picture}`}
-        />
-      })}
+      <Row>
+        <Col>
+          <ReactMarkdown source={description} />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        { pictures.map((picture, key) => {
+          return (
+            <Col key={key} md={{ span: 12 }}>
+              <Card
+                hoverable
+                bodyStyle={{display: "none"}}
+                cover={
+                  <img
+                    alt={folder}
+                    src={`/albums/${folder}/pictures/${picture}`}
+                  />
+                }
+              />
+            </Col>
+          );
+        })}
+      </Row>
     </div>
   );
 }
